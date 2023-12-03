@@ -64,7 +64,24 @@ class HomePage extends StatelessWidget {
                               fontSize: 24,
                             ),
                           ),
-                          Text("Gestiona tus gastos de la mejor forma")
+                          Text("Gestiona tus gastos de la mejor forma"),
+                          Divider(
+                            height: 24,
+                          ),
+                          Container(
+                            decoration: BoxDecoration(
+                              color: Colors.black.withOpacity(0.12),
+                              borderRadius: BorderRadius.circular(16),
+                            ),
+                            child: ListTile(
+                              leading: Icon(
+                                Icons.shopping_cart,
+                              ),
+                              title: Text("1 kg Huevos"),
+                              subtitle: Text("11/05/2023"),
+                              trailing: Text("S/ 15.0"),
+                            ),
+                          )
                         ],
                       ),
                     ),
