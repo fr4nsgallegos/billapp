@@ -1,7 +1,22 @@
 import 'package:flutter/material.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+class HomePage extends StatefulWidget {
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  showRegisterModal() {
+    showBottomSheet(
+      context: context,
+      builder: (BuildContext ctx) {
+        return Container(
+          height: 200,
+          color: Colors.red,
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -11,29 +26,34 @@ class HomePage extends StatelessWidget {
           Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              Container(
-                height: 100,
-                width: double.infinity,
-                color: Colors.black,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      Icons.add,
-                      color: Colors.white,
-                    ),
-                    SizedBox(
-                      width: 8,
-                    ),
-                    Text(
-                      "Agregar",
-                      style: TextStyle(
+              InkWell(
+                onTap: () {
+                  showRegisterModal();
+                },
+                child: Container(
+                  height: 100,
+                  width: double.infinity,
+                  color: Colors.black,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.add,
                         color: Colors.white,
-                        fontWeight: FontWeight.w700,
-                        fontSize: 18,
                       ),
-                    )
-                  ],
+                      SizedBox(
+                        width: 8,
+                      ),
+                      Text(
+                        "Agregar",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w700,
+                          fontSize: 18,
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ),
             ],
