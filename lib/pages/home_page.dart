@@ -1,3 +1,4 @@
+import 'package:billapp/db/db_admin.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -87,7 +88,9 @@ class _HomePageState extends State<HomePage> {
             children: [
               InkWell(
                 onTap: () {
-                  showRegisterModal();
+                  // showRegisterModal();
+                  DBAdmin dbAdmin = DBAdmin();
+                  dbAdmin.initDatabase();
                 },
                 child: Container(
                   height: 100,
