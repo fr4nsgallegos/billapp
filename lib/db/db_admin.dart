@@ -5,6 +5,30 @@ import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
 class DBAdmin {
+  Database? myDataBase;
+
+  Future<Database?> checkDataBase() async {
+    // //PRIMERA FORMA
+    // //No ha sido creada
+    // if (myDataBase == null) {
+    //   myDataBase = await initDatabase();
+    // }
+    // //Si ha sido creada
+    // else {
+    //   return myDataBase;
+    // }
+    // return myDataBase;
+
+    //SEGUNDA FORMA
+    // myDataBase ??= await initDatabase();
+
+    //TERCERA FORMA
+    if (myDataBase == null) {
+      myDataBase = await initDatabase();
+    }
+    return myDataBase;
+  }
+
   initDatabase() async {
     Directory directory = await getApplicationDocumentsDirectory();
     String pathDatabase = join(directory.path, "BillsDB.db");
