@@ -36,9 +36,11 @@ class _HomePageState extends State<HomePage> {
             children: [
               InkWell(
                 onTap: () {
-                  showRegisterModal();
-                  // DBAdmin dbAdmin = DBAdmin();
-                  // dbAdmin.initDatabase();
+                  // showRegisterModal();
+                  DBAdmin dbAdmin = DBAdmin();
+                  // dbAdmin.checkDataBase();
+                  dbAdmin.obtenerGastos();
+                  // dbAdmin.insertarGasto();
                 },
                 child: Container(
                   height: 100,

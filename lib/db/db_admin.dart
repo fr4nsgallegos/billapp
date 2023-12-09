@@ -8,6 +8,14 @@ class DBAdmin {
   Database? myDataBase;
 
   Future<Database?> checkDataBase() async {
+    //TERCERA FORMA
+    if (myDataBase == null) {
+      print("LA BD ES NULA");
+      myDataBase = await initDatabase();
+    }
+    print("LA BD YA EXISTE");
+    return myDataBase;
+
     // //PRIMERA FORMA
     // //No ha sido creada
     // if (myDataBase == null) {
@@ -21,19 +29,13 @@ class DBAdmin {
 
     //SEGUNDA FORMA
     // myDataBase ??= await initDatabase();
-
-    //TERCERA FORMA
-    if (myDataBase == null) {
-      myDataBase = await initDatabase();
-    }
-    return myDataBase;
   }
 
-  initDatabase() async {
+  Future<Database> initDatabase() async {
     Directory directory = await getApplicationDocumentsDirectory();
     String pathDatabase = join(directory.path, "BillsDB.db");
     print(pathDatabase);
-    openDatabase(
+    return await openDatabase(
       pathDatabase,
       version: 1,
       onCreate: (Database db, int version) {
@@ -49,9 +51,42 @@ class DBAdmin {
       },
     );
   }
+
   //CRUD
   //OBTENER GASTOS
+  obtenerGastos() async {
+    Database? db = await checkDataBase();
+    //OBTENER DATA Y FILTRAR POR FUNCION
+    List data = await db!.query(
+      "BILL",
+      columns: [
+        "id",
+        "product",
+        "price",
+        "type",
+      ],
+      where: "type='Kg.'",
+    );
+
+    //OBTENER DATA Y FILTRAR POR SENTENCIA SQL
+    // List data = await db!
+    //     .rawQuery("SELECT id, product, price, type FROM BILL WHERE type='Kg.'");
+    print(data);
+  }
+
   //INSERTAR GASTO
+  insertarGasto() async {
+    Database? db = await checkDataBase();
+    int res = await db!.insert(
+      "BILL",
+      {
+        "product": "Pan",
+        "price": 0.50,
+        "type": "Kg.",
+      },
+    );
+    print(res);
+  }
   //ACTUALIZAR GASTO
   //ELIMINAR GASTO
 }
