@@ -114,11 +114,25 @@ class _HomePageState extends State<HomePage> {
                           Divider(
                             height: 24,
                           ),
-                          ItemWidget(
-                            product: "heuvos",
-                            type: "kg",
-                            price: 12.5,
+                          Expanded(
+                            child: ListView.builder(
+                              itemCount: gastosList.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                return ItemWidget(
+                                    product:
+                                        gastosList[index]['product'] ?? "nn",
+                                    type: gastosList[index]['type'] ?? "nn",
+                                    price: double.parse(
+                                      gastosList[index]['price'],
+                                    ));
+                              },
+                            ),
                           ),
+                          // ItemWidget(
+                          //   product: "heuvos",
+                          //   type: "kg",
+                          //   price: 12.5,
+                          // ),
                         ],
                       ),
                     ),
