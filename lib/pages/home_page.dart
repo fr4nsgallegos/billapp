@@ -37,10 +37,22 @@ class _HomePageState extends State<HomePage> {
               InkWell(
                 onTap: () {
                   // showRegisterModal();
+
+                  //SIN PATRÓN SINGLETON CADA QUE SE PRESIONA EL BOTÓN SE CREA UNA INSTANCIA DE DBadmin
                   // DBAdmin dbAdmin = DBAdmin();
                   // dbAdmin.checkDataBase();
-                  DBAdmin().obtenerGastos();
                   // dbAdmin.insertarGasto();
+
+                  //CON PATRÓN SINGLETON, SOLO EXISTE UNA SOLA INSTANCIA DE DBADMIN Y ES GLOBAL
+                  DBAdmin().obtenerGastos();
+                  // DBAdmin().insertarGasto("Arrzon", 2.5, "Kg.");
+                  // DBAdmin().insertarGasto(
+                  //   {
+                  //     "product": "gaseosa",
+                  //     "type": "Lt",
+                  //     "price": 1.5,
+                  //   },
+                  // );
                 },
                 child: Container(
                   height: 100,

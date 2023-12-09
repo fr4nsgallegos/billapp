@@ -7,6 +7,7 @@ import 'package:sqflite/sqflite.dart';
 class DBAdmin {
   Database? _myDataBase;
 
+  //PATRÓN SINGLETON
   static final DBAdmin _instance = DBAdmin._();
   DBAdmin._();
   factory DBAdmin() {
@@ -62,17 +63,29 @@ class DBAdmin {
   //OBTENER GASTOS
   obtenerGastos() async {
     Database? db = await _checkDataBase();
-    //OBTENER DATA Y FILTRAR POR FUNCION
+
+    //OBTENER TODA LA BD POR FUNCIÓN
     List data = await db!.query(
-      "BILL",
+      'BILL',
       columns: [
         "id",
         "product",
         "price",
         "type",
       ],
-      where: "type='Kg.'",
     );
+
+    //OBTENER DATA Y FILTRAR POR FUNCION
+    // List data = await db!.query(
+    //   "BILL",
+    //   columns: [
+    //     "id",
+    //     "product",
+    //     "price",
+    //     "type",
+    //   ],
+    //   where: "type='Kg.'",
+    // );
 
     //OBTENER DATA Y FILTRAR POR SENTENCIA SQL
     // List data = await db!
@@ -81,15 +94,11 @@ class DBAdmin {
   }
 
   //INSERTAR GASTO
-  insertarGasto() async {
+  insertarGasto(Map<String, dynamic> data) async {
     Database? db = await _checkDataBase();
     int res = await db!.insert(
       "BILL",
-      {
-        "product": "Pan",
-        "price": 0.50,
-        "type": "Kg.",
-      },
+      data,
     );
     print(res);
   }
