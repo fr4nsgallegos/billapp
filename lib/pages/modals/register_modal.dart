@@ -54,11 +54,19 @@ class _RegisterModalState extends State<RegisterModal> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text("Seleccione el tipo"),
+                Text(
+                  "Seleccione el tipo",
+                  style: TextStyle(
+                    fontSize: 16,
+                  ),
+                ),
                 SizedBox(
-                  width: 8,
+                  width: 16,
                 ),
                 DropdownButton(
+                  // isExpanded: true,
+                  // menuMaxHeight: 300,
+
                   hint: Text("Seleccione"),
                   items: [
                     DropdownMenuItem(
@@ -114,6 +122,11 @@ class _RegisterModalState extends State<RegisterModal> {
                     //se ha insertado correctamente
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
+                        backgroundColor: Colors.green,
+                        behavior: SnackBarBehavior.floating,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(16),
+                        ),
                         content: Text("Se realizo el registro correctamente"),
                       ),
                     );
