@@ -10,7 +10,7 @@ class RegisterModal extends StatefulWidget {
 }
 
 class _RegisterModalState extends State<RegisterModal> {
-  TextEditingController _titleController = TextEditingController();
+  TextEditingController _productController = TextEditingController();
   TextEditingController _priceController = TextEditingController();
   TextEditingController _typeController = TextEditingController();
 
@@ -33,7 +33,7 @@ class _RegisterModalState extends State<RegisterModal> {
             height: 16,
           ),
           TextFieldNormalWidget(
-              hintText: "Ingresa el título", controller: _titleController),
+              hintText: "Ingresa el título", controller: _productController),
           SizedBox(
             height: 16,
           ),
@@ -97,11 +97,12 @@ class _RegisterModalState extends State<RegisterModal> {
                 // DBAdmin().obtenerGastos();
                 // DBAdmin().insertarGasto("Arrzon", 2.5, "Kg.");
                 Map<String, dynamic> value = {
-                  "product": _titleController.text,
-                  "price": _priceController.text,
+                  "product": _productController.text,
+                  "price": double.parse(_priceController.text),
                   "type": _typeController.text,
                 };
                 DBAdmin().insertarGasto(value);
+                // DBAdmin().obtenerGastos();
               },
               child: const Text(
                 "Agregar",

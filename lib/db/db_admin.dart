@@ -18,7 +18,7 @@ class DBAdmin {
     //TERCERA FORMA
     if (_myDataBase == null) {
       print("LA BD ES NULA");
-      _myDataBase = await initDatabase();
+      _myDataBase = await _initDatabase();
     }
     print("LA BD YA EXISTE");
     return _myDataBase;
@@ -38,7 +38,7 @@ class DBAdmin {
     // myDataBase ??= await initDatabase();
   }
 
-  Future<Database> initDatabase() async {
+  Future<Database> _initDatabase() async {
     Directory directory = await getApplicationDocumentsDirectory();
     String pathDatabase = join(directory.path, "BillsDB.db");
     print(pathDatabase);

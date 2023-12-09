@@ -37,6 +37,7 @@ class _HomePageState extends State<HomePage> {
               InkWell(
                 onTap: () {
                   showRegisterModal();
+                  DBAdmin().obtenerGastos();
                 },
                 child: Container(
                   height: 100,
