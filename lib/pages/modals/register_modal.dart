@@ -109,7 +109,13 @@ class _RegisterModalState extends State<RegisterModal> {
                   type: _typeController.text,
                 );
 
-                DBAdmin().insertarGasto(model);
+                DBAdmin().insertarGasto(model).then((value) {
+                  if (value > 0) {
+                    //se ha insertado correctamente
+                  } else {}
+                }).catchError((error) {
+                  print(error);
+                });
 
                 // DBAdmin().obtenerGastos();
               },

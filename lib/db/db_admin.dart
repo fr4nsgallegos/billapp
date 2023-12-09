@@ -95,17 +95,19 @@ class DBAdmin {
   }
 
   //INSERTAR GASTO
-  insertarGasto(BillModel data) async {
+  Future<int> insertarGasto(BillModel data) async {
     Database? db = await _checkDataBase();
     int res = await db!.insert(
       "BILL",
-      {
-        "product": data.product,
-        "type": data.type,
-        "price": data.price,
-      },
+      data.convertirAMap(),
+      // {
+      //   "product": data.product,
+      //   "type": data.type,
+      //   "price": data.price,
+      // },
     );
     print(res);
+    return res;
   }
   //ACTUALIZAR GASTO
   //ELIMINAR GASTO

@@ -8,4 +8,10 @@ class BillModel {
     required this.price,
     required this.type,
   });
+
+  convertirAMap() => {
+        "product": product,
+        "price": price,
+        "type": type,
+      };
 }
