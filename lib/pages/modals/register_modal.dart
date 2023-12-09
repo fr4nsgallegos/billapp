@@ -112,6 +112,12 @@ class _RegisterModalState extends State<RegisterModal> {
                 DBAdmin().insertarGasto(model).then((value) {
                   if (value > 0) {
                     //se ha insertado correctamente
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text("Se realizo el registro correctamente"),
+                      ),
+                    );
+                    Navigator.pop(context);
                   } else {}
                 }).catchError((error) {
                   print(error);
