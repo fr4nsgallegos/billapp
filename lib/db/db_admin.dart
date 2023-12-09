@@ -62,11 +62,11 @@ class DBAdmin {
 
   //CRUD
   //OBTENER GASTOS
-  obtenerGastos() async {
+  Future<List<Map>> obtenerGastos() async {
     Database? db = await _checkDataBase();
 
     //OBTENER TODA LA BD POR FUNCIÓN
-    List data = await db!.query(
+    List<Map<String, dynamic>> data = await db!.query(
       'BILL',
       columns: [
         "id",
@@ -75,6 +75,7 @@ class DBAdmin {
         "type",
       ],
     );
+    return data;
 
     //OBTENER DATA Y FILTRAR POR FUNCION
     // List data = await db!.query(

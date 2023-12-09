@@ -1,5 +1,6 @@
 import 'package:billapp/db/db_admin.dart';
 import 'package:billapp/pages/modals/register_modal.dart';
+import 'package:billapp/widgets/item_widget.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -8,6 +9,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  List<Map> gastosList = [];
+
   showRegisterModal() {
     showModalBottomSheet(
       backgroundColor: Colors.transparent,
@@ -24,6 +27,20 @@ class _HomePageState extends State<HomePage> {
         );
       },
     );
+  }
+
+  Future<void> getDataGeneral() async {
+    gastosList = await DBAdmin().obtenerGastos();
+    print("RECUPERANDO LA BD Y ASIGNANDOLA EN NUESTRA LISTA");
+    print(gastosList);
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getDataGeneral();
   }
 
   @override
@@ -97,20 +114,11 @@ class _HomePageState extends State<HomePage> {
                           Divider(
                             height: 24,
                           ),
-                          Container(
-                            decoration: BoxDecoration(
-                              color: Colors.black.withOpacity(0.12),
-                              borderRadius: BorderRadius.circular(16),
-                            ),
-                            child: ListTile(
-                              leading: Icon(
-                                Icons.shopping_cart,
-                              ),
-                              title: Text("1 kg Huevos"),
-                              subtitle: Text("11/05/2023"),
-                              trailing: Text("S/ 15.0"),
-                            ),
-                          )
+                          ItemWidget(
+                            product: "heuvos",
+                            type: "kg",
+                            price: 12.5,
+                          ),
                         ],
                       ),
                     ),
