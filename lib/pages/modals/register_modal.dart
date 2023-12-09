@@ -1,3 +1,4 @@
+import 'package:billapp/db/db_admin.dart';
 import 'package:billapp/widgets/textfield_normal_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -72,7 +73,9 @@ class _RegisterModalState extends State<RegisterModal> {
                       child: Text("Lata"),
                     ),
                   ],
-                  onChanged: (seleccionActual) {},
+                  onChanged: (seleccionActual) {
+                    _typeController.text = seleccionActual!;
+                  },
                 ),
               ],
             ),
@@ -84,7 +87,22 @@ class _RegisterModalState extends State<RegisterModal> {
             width: double.infinity,
             height: 50,
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                //SIN PATRÓN SINGLETON CADA QUE SE PRESIONA EL BOTÓN SE CREA UNA INSTANCIA DE DBadmin
+                // DBAdmin dbAdmin = DBAdmin();
+                // dbAdmin.checkDataBase();
+                // dbAdmin.insertarGasto();
+
+                //CON PATRÓN SINGLETON, SOLO EXISTE UNA SOLA INSTANCIA DE DBADMIN Y ES GLOBAL
+                // DBAdmin().obtenerGastos();
+                // DBAdmin().insertarGasto("Arrzon", 2.5, "Kg.");
+                Map<String, dynamic> value = {
+                  "product": _titleController.text,
+                  "price": _priceController.text,
+                  "type": _typeController.text,
+                };
+                DBAdmin().insertarGasto(value);
+              },
               child: const Text(
                 "Agregar",
                 style: TextStyle(
