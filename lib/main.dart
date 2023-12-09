@@ -5,9 +5,7 @@ void main() {
   runApp(
     MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: HomePage(),
-      ),
+      home: HomePage(),
     ),
   );
 }

@@ -22,15 +22,6 @@ class DBAdmin {
                   monto REAL,
                   cantidad REAL
                )""");
-        db.execute("""CREATE TABLE BILL2(
-                  id INTEGER PRIMARY KEY AUTOINCREMENT,
-                  product TEXT,
-                  price INT,
-                  datetime TEXT,
-                  type TEXT,
-                  monto REAL,
-                  cantidad REAL
-               )""");
       },
     );
   }
