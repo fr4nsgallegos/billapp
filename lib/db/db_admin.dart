@@ -5,16 +5,22 @@ import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
 class DBAdmin {
-  Database? myDataBase;
+  Database? _myDataBase;
 
-  Future<Database?> checkDataBase() async {
+  static final DBAdmin _instance = DBAdmin._();
+  DBAdmin._();
+  factory DBAdmin() {
+    return _instance;
+  }
+
+  Future<Database?> _checkDataBase() async {
     //TERCERA FORMA
-    if (myDataBase == null) {
+    if (_myDataBase == null) {
       print("LA BD ES NULA");
-      myDataBase = await initDatabase();
+      _myDataBase = await initDatabase();
     }
     print("LA BD YA EXISTE");
-    return myDataBase;
+    return _myDataBase;
 
     // //PRIMERA FORMA
     // //No ha sido creada
@@ -55,7 +61,7 @@ class DBAdmin {
   //CRUD
   //OBTENER GASTOS
   obtenerGastos() async {
-    Database? db = await checkDataBase();
+    Database? db = await _checkDataBase();
     //OBTENER DATA Y FILTRAR POR FUNCION
     List data = await db!.query(
       "BILL",
@@ -76,7 +82,7 @@ class DBAdmin {
 
   //INSERTAR GASTO
   insertarGasto() async {
-    Database? db = await checkDataBase();
+    Database? db = await _checkDataBase();
     int res = await db!.insert(
       "BILL",
       {
