@@ -1,4 +1,5 @@
 import 'package:billapp/db/db_admin.dart';
+import 'package:billapp/models/bill_model.dart';
 import 'package:billapp/widgets/textfield_normal_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -101,7 +102,15 @@ class _RegisterModalState extends State<RegisterModal> {
                   "price": double.parse(_priceController.text),
                   "type": _typeController.text,
                 };
-                DBAdmin().insertarGasto(value);
+
+                BillModel model = BillModel(
+                  product: _productController.text,
+                  price: double.parse(_priceController.text),
+                  type: _typeController.text,
+                );
+
+                DBAdmin().insertarGasto(model);
+
                 // DBAdmin().obtenerGastos();
               },
               child: const Text(
