@@ -128,8 +128,13 @@ class _HomePageState extends State<HomePage> {
                             child: ListView.builder(
                               itemCount: gastosBill.length,
                               itemBuilder: (BuildContext context, int index) {
-                                return ItemWidget(
-                                  billProduct: gastosBill[index],
+                                return GestureDetector(
+                                  onTap: () {
+                                    DBAdmin().delBill(gastosBill[index].id);
+                                  },
+                                  child: ItemWidget(
+                                    billProduct: gastosBill[index],
+                                  ),
                                 );
                               },
                             ),

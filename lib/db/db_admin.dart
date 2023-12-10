@@ -126,6 +126,19 @@ class DBAdmin {
     print(res);
     return res;
   }
+
   //ACTUALIZAR GASTO
   //ELIMINAR GASTO
+  Future<void> delBill(int id) async {
+    Database? db = await _checkDataBase();
+    await db!
+        .delete(
+      'BILL',
+      where: 'id = $id',
+    )
+        .then((value) {
+      print("------------------------");
+      print(value);
+    });
+  }
 }
