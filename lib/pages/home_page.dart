@@ -28,7 +28,9 @@ class _HomePageState extends State<HomePage> {
           child: RegisterModal(),
         );
       },
-    );
+    ).then((value) {
+      getDataGeneralBillModel();
+    });
   }
 
   // Future<void> getDataGeneralMap() async {
@@ -64,7 +66,7 @@ class _HomePageState extends State<HomePage> {
               InkWell(
                 onTap: () {
                   showRegisterModal();
-                  DBAdmin().obtenerGastos();
+                  // DBAdmin().obtenerGastos();
                 },
                 child: Container(
                   height: 100,
@@ -130,8 +132,11 @@ class _HomePageState extends State<HomePage> {
                               itemBuilder: (BuildContext context, int index) {
                                 return GestureDetector(
                                   onTap: () {
-                                    DBAdmin().delBill(gastosBill[index].id!);
-                                    getDataGeneralBillModel();
+                                    DBAdmin()
+                                        .delBill(gastosBill[index].id!)
+                                        .then((value) {
+                                      getDataGeneralBillModel();
+                                    });
                                   },
                                   child: ItemWidget(
                                     billProduct: gastosBill[index],
