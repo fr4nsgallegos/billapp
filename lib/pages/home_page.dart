@@ -130,7 +130,8 @@ class _HomePageState extends State<HomePage> {
                               itemBuilder: (BuildContext context, int index) {
                                 return GestureDetector(
                                   onTap: () {
-                                    DBAdmin().delBill(gastosBill[index].id);
+                                    DBAdmin().delBill(gastosBill[index].id!);
+                                    getDataGeneralBillModel();
                                   },
                                   child: ItemWidget(
                                     billProduct: gastosBill[index],
