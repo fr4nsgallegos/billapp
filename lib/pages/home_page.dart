@@ -132,6 +132,14 @@ class _HomePageState extends State<HomePage> {
                               itemBuilder: (BuildContext context, int index) {
                                 return GestureDetector(
                                   onTap: () {
+                                    // //ELIMINAR GASTO
+                                    // DBAdmin()
+                                    //     .delBill(gastosBill[index].id!)
+                                    //     .then((value) {
+                                    //   getDataGeneralBillModel();
+                                    // });
+
+                                    //ACTUALIZAR GASTO
                                     DBAdmin()
                                         .delBill(gastosBill[index].id!)
                                         .then((value) {

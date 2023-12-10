@@ -128,6 +128,17 @@ class DBAdmin {
   }
 
   //ACTUALIZAR GASTO
+  Future<void> updBill(int id) async {
+    Database? db = await _checkDataBase();
+    await db!.update(
+        "BILL",
+        {
+          "product": "ACTUALIZADO",
+          "price": 19.9,
+        },
+        where: "id = $id");
+  }
+
   //ELIMINAR GASTO
   Future<void> delBill(int id) async {
     Database? db = await _checkDataBase();
