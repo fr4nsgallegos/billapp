@@ -1,13 +1,10 @@
+import 'package:billapp/models/bill_model.dart';
 import 'package:flutter/material.dart';
 
 class ItemWidget extends StatelessWidget {
-  String product;
-  String type;
-  double price;
+  BillModel billProduct;
   ItemWidget({
-    required this.product,
-    required this.type,
-    required this.price,
+    required this.billProduct,
   });
   @override
   Widget build(BuildContext context) {
@@ -21,9 +18,9 @@ class ItemWidget extends StatelessWidget {
         leading: Icon(
           Icons.shopping_cart,
         ),
-        title: Text(product),
-        subtitle: Text(type),
-        trailing: Text("S/ $price"),
+        title: Text(billProduct.product),
+        subtitle: Text(billProduct.type),
+        trailing: Text("S/ ${billProduct.price}"),
       ),
     );
   }

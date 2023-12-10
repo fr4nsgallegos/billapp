@@ -75,6 +75,8 @@ class DBAdmin {
         "type",
       ],
     );
+    print(data);
+
     return data;
 
     //OBTENER DATA Y FILTRAR POR FUNCION
@@ -92,7 +94,21 @@ class DBAdmin {
     //OBTENER DATA Y FILTRAR POR SENTENCIA SQL
     // List data = await db!
     //     .rawQuery("SELECT id, product, price, type FROM BILL WHERE type='Kg.'");
-    print(data);
+  }
+
+  Future<List<BillModel>> getBills() async {
+    Database? db = await _checkDataBase();
+    List<Map<String, dynamic>> data = await db!.query(
+      'BILL',
+      columns: [
+        "id",
+        "product",
+        "price",
+        "type",
+      ],
+    );
+    List<BillModel> bills = data.map((e) => BillModel.fromJson(e)).toList();
+    return bills;
   }
 
   //INSERTAR GASTO
@@ -100,7 +116,7 @@ class DBAdmin {
     Database? db = await _checkDataBase();
     int res = await db!.insert(
       "BILL",
-      data.convertirAMap(),
+      data.toJson(),
       // {
       //   "product": data.product,
       //   "type": data.type,

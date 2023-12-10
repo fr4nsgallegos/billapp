@@ -1,4 +1,5 @@
 import 'package:billapp/db/db_admin.dart';
+import 'package:billapp/models/bill_model.dart';
 import 'package:billapp/pages/modals/register_modal.dart';
 import 'package:billapp/widgets/item_widget.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +11,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   List<Map> gastosList = [];
+  List<BillModel> gastosBill = [];
 
   showRegisterModal() {
     showModalBottomSheet(
@@ -29,10 +31,17 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Future<void> getDataGeneral() async {
-    gastosList = await DBAdmin().obtenerGastos();
-    print("RECUPERANDO LA BD Y ASIGNANDOLA EN NUESTRA LISTA");
-    print(gastosList);
+  // Future<void> getDataGeneralMap() async {
+  //   gastosList = await DBAdmin().obtenerGastos();
+  //   print("RECUPERANDO LA BD Y ASIGNANDOLA EN NUESTRA LISTA");
+  //   print(gastosList);
+  //   setState(() {});
+  // }
+
+  Future<void> getDataGeneralBillModel() async {
+    gastosBill = await DBAdmin().getBills();
+    print("RECUPERANDO LA BD Y ASIGNANDOLA EN NUESTRA LISTA de BILLS MODEL");
+    print(gastosBill);
     setState(() {});
   }
 
@@ -40,7 +49,8 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    getDataGeneral();
+    // getDataGeneralMap();
+    getDataGeneralBillModel();
   }
 
   @override
@@ -116,23 +126,14 @@ class _HomePageState extends State<HomePage> {
                           ),
                           Expanded(
                             child: ListView.builder(
-                              itemCount: gastosList.length,
+                              itemCount: gastosBill.length,
                               itemBuilder: (BuildContext context, int index) {
                                 return ItemWidget(
-                                    product:
-                                        gastosList[index]['product'] ?? "nn",
-                                    type: gastosList[index]['type'] ?? "nn",
-                                    price: double.parse(
-                                      gastosList[index]['price'],
-                                    ));
+                                  billProduct: gastosBill[index],
+                                );
                               },
                             ),
                           ),
-                          // ItemWidget(
-                          //   product: "heuvos",
-                          //   type: "kg",
-                          //   price: 12.5,
-                          // ),
                         ],
                       ),
                     ),

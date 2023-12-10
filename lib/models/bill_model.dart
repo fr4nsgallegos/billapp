@@ -9,9 +9,15 @@ class BillModel {
     required this.type,
   });
 
-  convertirAMap() => {
+  Map<String, dynamic> toJson() => {
         "product": product,
         "price": price,
         "type": type,
       };
+
+  factory BillModel.fromJson(Map<String, dynamic> json) => BillModel(
+        product: json["product"],
+        price: double.parse(json["price"].toString()),
+        type: json["type"],
+      );
 }
